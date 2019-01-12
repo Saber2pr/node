@@ -10,13 +10,13 @@
   "license": "ISC",
   "main": "./lib/index.js",
   "scripts": {
-    "init": "./script/__init__.sh",
-    "new-mod": "./script/_newModule_.sh",
+    "init": "bash ./script/__init__.sh",
+    "new-mod": "bash ./script/_newModule_.sh",
     "start": "tsc --watch",
-    "dev": "webpack --watch"
+    "test": "node ./lib/test/test.js"
   },
   "devDependencies": {
-    "typescript": "^3.2.1",
-    "webpack": "^3.12.0"
+    "@types/node": "^10.12.18",
+    "typescript": "^3.2.1"
   }
 }

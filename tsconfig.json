@@ -4,7 +4,11 @@
     "module": "commonjs",
     "declaration": true,
     "outDir": "./lib",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "lib": [
+      "esnext",
+      "es2015.promise"
+    ]
   },
   "include": ["src"],
   "exclude": ["node_modules"]

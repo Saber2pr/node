@@ -21,8 +21,10 @@ mkdir -p ${path_test}
 
 # module file
 core_module="${path_core}/${name}.ts"
+# replace - to _
+rename=${name/-/_}
 # module test file
-module_test_name="test_${name}"
+module_test_name="test_${rename}"
 test_module="${path_test}/${module_test_name}.ts"
 # test entry
 test="${path_test}/test.ts"
@@ -31,13 +33,13 @@ index="${path_root}/index.ts"
 
 # init module
 touch ${core_module}
-content_module="export let ${name} = '${name}'"
+content_module="export let ${rename} = '${name}'"
 echo ${content_module} > ${core_module}
 
 # init module test file
 touch ${test_module}
-content_module_test="import { ${name} } from '../core/${name}'"
-content_module_test_main="export function ${module_test_name}() {console.log(${name})}"
+content_module_test="import { ${rename} } from '../core/${name}'"
+content_module_test_main="export function ${module_test_name}() {console.log(${rename})}"
 echo ${content_module_test} > ${test_module}
 echo ${content_module_test_main} >> ${test_module}
 
