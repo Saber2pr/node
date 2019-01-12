@@ -1,0 +1,22 @@
+{
+  "name": "saber-node",
+  "version": "1.0.0",
+  "description": "utils for nodejs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saber2pr/saber-node.git"
+  },
+  "author": "saber2pr",
+  "license": "ISC",
+  "main": "./lib/index.js",
+  "scripts": {
+    "init": "./script/__init__.sh",
+    "new-mod": "./script/_newModule_.sh",
+    "start": "tsc --watch",
+    "dev": "webpack --watch"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.1",
+    "webpack": "^3.12.0"
+  }
+}
