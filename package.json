@@ -1,6 +1,6 @@
 {
   "name": "saber-node",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "utils for nodejs",
   "repository": {
     "type": "git",
@@ -16,7 +16,9 @@
     "test": "node ./lib/test/test.js"
   },
   "devDependencies": {
-    "@types/node": "^10.12.18",
     "typescript": "^3.2.1"
+  },
+  "dependencies": {
+    "@types/node": "^10.12.18"
   }
 }
