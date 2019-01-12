@@ -27,8 +27,8 @@ npm run new-mod
 # auto compile to commonjs
 npm start
 
-# auto compile to es5
-npm run dev
+# run test script
+npm run test
 
 ```
 
@@ -36,7 +36,7 @@ npm run dev
 
 > you should write ts in /src
 
-> ts -(tsc)-> commonjs -(webpack)-> es5
+> ts -(tsc)-> commonjs
 
 > you should make test in /src/test
 
@@ -56,5 +56,3 @@ npm run dev
 # if all is well, try:
 npm publish
 ```
-
-
