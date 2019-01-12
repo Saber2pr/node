@@ -1,1 +1,1 @@
-export declare function test_saber_node(): void;
+export declare function test_saber_node(): Promise<void>;

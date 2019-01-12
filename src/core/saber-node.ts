@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-01-12 13:15:21
  */
 import { createInterface } from 'readline'
-import { exists, writeFile, mkdir, PathLike } from 'fs'
+import { exists, writeFile, mkdir, PathLike, appendFile } from 'fs'
 import { dirname } from 'path'
 /**
  * @exports Terminal
@@ -70,6 +70,15 @@ export namespace File {
       return
     }
   }
+  /**
+   * pushFile
+   * @param filePath
+   * @param value
+   */
+  export const pushFile = async (filePath: string, value) =>
+    new Promise<NodeJS.ErrnoException>(resolve => {
+      appendFile(filePath, value, err => resolve(err))
+    })
   /**
    * createDir
    * @param path

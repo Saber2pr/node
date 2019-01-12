@@ -36,6 +36,12 @@ export declare namespace File {
      */
     const createFile: (filePath: string, value: string) => Promise<void>;
     /**
+     * pushFile
+     * @param filePath
+     * @param value
+     */
+    const pushFile: (filePath: string, value: any) => Promise<NodeJS.ErrnoException>;
+    /**
      * createDir
      * @param path
      */
