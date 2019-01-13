@@ -56,7 +56,7 @@ export declare namespace File {
      * read
      * @param path
      */
-    const read: (path: string) => Promise<Buffer>;
+    const read: (path: string) => Promise<string>;
 }
 /**
  * Server

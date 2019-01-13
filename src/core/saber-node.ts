@@ -105,12 +105,12 @@ export namespace File {
    * @param path
    */
   export const read = async (path: string) =>
-    new Promise<Buffer>((resolve, reject) =>
+    new Promise<string>((resolve, reject) =>
       readFile(path, (err, res) => {
         if (err) {
           reject(err)
         } else {
-          resolve(res)
+          resolve(res.toString())
         }
       })
     )
