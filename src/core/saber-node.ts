@@ -2,11 +2,11 @@
  * @Author: AK-12
  * @Date: 2019-01-11 21:41:32
  * @Last Modified by: AK-12
- * @Last Modified time: 2019-01-12 13:15:21
+ * @Last Modified time: 2019-01-13 16:02:01
  */
 import { createInterface } from 'readline'
 import { exists, writeFile, mkdir, PathLike, appendFile, readFile } from 'fs'
-import { dirname } from 'path'
+import { dirname, resolve } from 'path'
 import { createServer, IncomingMessage, ServerResponse } from 'http'
 /**
  * @exports Terminal
@@ -127,7 +127,7 @@ export namespace Server {
     new Promise<string>((resolve, reject) => {
       let str = ''
       req.on('data', data => (str += data))
-      req.on('end', data => resolve(data))
+      req.on('end', () => resolve(str))
       req.on('error', err => reject(err))
     })
   /**
@@ -140,17 +140,25 @@ export namespace Server {
     req: IncomingMessage,
     res: ServerResponse
   ) => {
-    const url = rootDir + req.url
+    const url = resolve(rootDir + req.url)
+    console.log(url)
     if (req.method === 'GET') {
       const data_fromLocal = await File.read(url)
       res.write(data_fromLocal)
       res.end()
+      return
     } else if (req.method === 'POST') {
       const data_fromReq = await getFromRequest(req)
-      if (!(await Path.isExist(url))) {
-        File.pushFile(url, data_fromReq)
+      if (await Path.isExist(url)) {
+        console.log('exist, push', url)
+        await File.pushFile(url, data_fromReq)
+        res.end()
+        return
       } else {
-        File.createFile(url, data_fromReq)
+        console.log('not exist, create', url)
+        await File.createFile(url, data_fromReq)
+        res.end()
+        return
       }
     }
     return
@@ -160,9 +168,8 @@ export namespace Server {
    * @param port
    * @param rootDir
    */
-  export const create = (port: number, rootDir: string = '/') => {
+  export const create = (port: number, rootDir: string = '/') =>
     createServer(requestListener(rootDir)).listen(port, 'localhost', () =>
       console.log(`http://localhost:${port}/index.html`)
     )
-  }
 }

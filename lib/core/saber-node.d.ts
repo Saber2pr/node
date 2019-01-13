@@ -67,5 +67,5 @@ export declare namespace Server {
      * @param port
      * @param rootDir
      */
-    const create: (port: number, rootDir?: string) => void;
+    const create: (port: number, rootDir?: string) => import("http").Server;
 }
