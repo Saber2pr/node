@@ -52,4 +52,20 @@ export declare namespace File {
      * @returns {Promise<any>}
      */
     const createPath: (path: string) => Promise<any>;
+    /**
+     * read
+     * @param path
+     */
+    const read: (path: string) => Promise<Buffer>;
+}
+/**
+ * Server
+ */
+export declare namespace Server {
+    /**
+     * create
+     * @param port
+     * @param rootDir
+     */
+    const create: (port: number, rootDir?: string) => void;
 }

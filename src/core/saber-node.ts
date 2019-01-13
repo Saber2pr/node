@@ -5,8 +5,9 @@
  * @Last Modified time: 2019-01-12 13:15:21
  */
 import { createInterface } from 'readline'
-import { exists, writeFile, mkdir, PathLike, appendFile } from 'fs'
+import { exists, writeFile, mkdir, PathLike, appendFile, readFile } from 'fs'
 import { dirname } from 'path'
+import { createServer, IncomingMessage, ServerResponse } from 'http'
 /**
  * @exports Terminal
  */
@@ -91,13 +92,77 @@ export namespace File {
    * @returns {Promise<any>}
    */
   export const createPath = async (path: string): Promise<any> => {
-    const exists = await Path.isExist(path)
-    if (exists) {
+    if (await Path.isExist(path)) {
       return
     } else {
       await createPath(dirname(path))
       await createDir(path)
       return
     }
+  }
+  /**
+   * read
+   * @param path
+   */
+  export const read = async (path: string) =>
+    new Promise<Buffer>((resolve, reject) =>
+      readFile(path, (err, res) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(res)
+        }
+      })
+    )
+}
+/**
+ * Server
+ */
+export namespace Server {
+  /**
+   * getFromRequest
+   * @param req
+   */
+  const getFromRequest = (req: IncomingMessage) =>
+    new Promise<string>((resolve, reject) => {
+      let str = ''
+      req.on('data', data => (str += data))
+      req.on('end', data => resolve(data))
+      req.on('error', err => reject(err))
+    })
+  /**
+   * requestListener
+   * @param req
+   * @param res
+   * @param rootDir
+   */
+  const requestListener = (rootDir: string) => async (
+    req: IncomingMessage,
+    res: ServerResponse
+  ) => {
+    const url = rootDir + req.url
+    if (req.method === 'GET') {
+      const data_fromLocal = await File.read(url)
+      res.write(data_fromLocal)
+      res.end()
+    } else if (req.method === 'POST') {
+      const data_fromReq = await getFromRequest(req)
+      if (!(await Path.isExist(url))) {
+        File.pushFile(url, data_fromReq)
+      } else {
+        File.createFile(url, data_fromReq)
+      }
+    }
+    return
+  }
+  /**
+   * create
+   * @param port
+   * @param rootDir
+   */
+  export const create = (port: number, rootDir: string = '/') => {
+    createServer(requestListener(rootDir)).listen(port, 'localhost', () =>
+      console.log(`http://localhost:${port}/index.html`)
+    )
   }
 }
