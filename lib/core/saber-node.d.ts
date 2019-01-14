@@ -65,7 +65,7 @@ export declare namespace File {
          * pipe
          * @param path
          */
-        const pipe: <T>(path: string) => (callback: (fileData: T) => T) => Promise<void>;
+        const pipe: <T = any>(path: string) => (callback: (fileData: T) => T) => Promise<void>;
     }
 }
 /**

@@ -122,7 +122,7 @@ export namespace File {
      * pipe
      * @param path
      */
-    export const pipe = <T>(path: string) => async (
+    export const pipe = <T = any>(path: string) => async (
       callback: (fileData: T) => T
     ) => {
       await File.createFile(
