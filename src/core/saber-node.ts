@@ -114,6 +114,19 @@ export namespace File {
         }
       })
     )
+  /**
+   * edit
+   * @param path
+   */
+  export const edit = <T>(path: string) => async (
+    callback: (packageData: T) => T
+  ) => {
+    await File.createFile(
+      path,
+      JSON.stringify(callback(JSON.parse(await File.read(path)) as T), null, 2)
+    )
+    return
+  }
 }
 /**
  * Server
