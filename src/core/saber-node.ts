@@ -27,6 +27,26 @@ export namespace Terminal {
         resolve(answer.trim())
       })
     })
+  /**
+   * Print
+   */
+  export namespace Print {
+    /**
+     * error
+     * @param message
+     */
+    export const error = (message: string) => console.log('\x1b[31m', message)
+    /**
+     * success
+     * @param message
+     */
+    export const success = (message: string) => console.log('\x1b[32m', message)
+    /**
+     * tips
+     * @param message
+     */
+    export const tips = (message: string) => console.log('\x1b[34m', message)
+  }
 }
 /**
  * @exports Path

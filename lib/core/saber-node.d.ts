@@ -9,6 +9,26 @@ export declare namespace Terminal {
      * @param question
      */
     const getUserInput: (question: string) => Promise<string>;
+    /**
+     * Print
+     */
+    namespace Print {
+        /**
+         * error
+         * @param message
+         */
+        const error: (message: string) => void;
+        /**
+         * success
+         * @param message
+         */
+        const success: (message: string) => void;
+        /**
+         * tips
+         * @param message
+         */
+        const tips: (message: string) => void;
+    }
 }
 /**
  * @exports Path
