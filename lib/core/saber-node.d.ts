@@ -57,6 +57,11 @@ export declare namespace File {
      * @param path
      */
     const read: (path: string) => Promise<string>;
+    /**
+     * edit
+     * @param path
+     */
+    const edit: <T>(path: string) => (callback: (packageData: T) => T) => Promise<void>;
 }
 /**
  * Server
