@@ -36,11 +36,11 @@ export declare namespace File {
      */
     const createFile: (filePath: string, value: string) => Promise<void>;
     /**
-     * pushFile
+     * push
      * @param filePath
      * @param value
      */
-    const pushFile: (filePath: string, value: any) => Promise<NodeJS.ErrnoException>;
+    const push: (filePath: string, value: any) => Promise<NodeJS.ErrnoException>;
     /**
      * createDir
      * @param path
@@ -58,10 +58,15 @@ export declare namespace File {
      */
     const read: (path: string) => Promise<string>;
     /**
-     * edit
-     * @param path
+     * json
      */
-    const edit: <T>(path: string) => (callback: (packageData: T) => T) => Promise<void>;
+    namespace Json {
+        /**
+         * pipe
+         * @param path
+         */
+        const pipe: <T>(path: string) => (callback: (fileData: T) => T) => Promise<void>;
+    }
 }
 /**
  * Server

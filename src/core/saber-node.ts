@@ -2,7 +2,7 @@
  * @Author: AK-12
  * @Date: 2019-01-11 21:41:32
  * @Last Modified by: AK-12
- * @Last Modified time: 2019-01-13 16:02:01
+ * @Last Modified time: 2019-01-14 09:15:46
  */
 import { createInterface } from 'readline'
 import { exists, writeFile, mkdir, PathLike, appendFile, readFile } from 'fs'
@@ -72,11 +72,11 @@ export namespace File {
     }
   }
   /**
-   * pushFile
+   * push
    * @param filePath
    * @param value
    */
-  export const pushFile = async (filePath: string, value) =>
+  export const push = async (filePath: string, value) =>
     new Promise<NodeJS.ErrnoException>(resolve => {
       appendFile(filePath, value, err => resolve(err))
     })
@@ -115,17 +115,26 @@ export namespace File {
       })
     )
   /**
-   * edit
-   * @param path
+   * json
    */
-  export const edit = <T>(path: string) => async (
-    callback: (packageData: T) => T
-  ) => {
-    await File.createFile(
-      path,
-      JSON.stringify(callback(JSON.parse(await File.read(path)) as T), null, 2)
-    )
-    return
+  export namespace Json {
+    /**
+     * pipe
+     * @param path
+     */
+    export const pipe = <T>(path: string) => async (
+      callback: (fileData: T) => T
+    ) => {
+      await File.createFile(
+        path,
+        JSON.stringify(
+          callback(JSON.parse(await File.read(path)) as T),
+          null,
+          2
+        )
+      )
+      return
+    }
   }
 }
 /**
@@ -154,24 +163,22 @@ export namespace Server {
     res: ServerResponse
   ) => {
     const url = resolve(rootDir + req.url)
-    console.log(url)
     if (req.method === 'GET') {
-      const data_fromLocal = await File.read(url)
-      res.write(data_fromLocal)
-      res.end()
+      File.read(url)
+        .then(data => res.write(data))
+        .then(() => res.end())
+        .catch(err => console.log(err))
       return
     } else if (req.method === 'POST') {
       const data_fromReq = await getFromRequest(req)
       if (await Path.isExist(url)) {
-        console.log('exist, push', url)
-        await File.pushFile(url, data_fromReq)
-        res.end()
-        return
+        File.push(url, data_fromReq)
+          .then(() => res.end())
+          .catch(err => console.log(err))
       } else {
-        console.log('not exist, create', url)
-        await File.createFile(url, data_fromReq)
-        res.end()
-        return
+        File.createFile(url, data_fromReq)
+          .then(() => res.end())
+          .catch(err => console.log(err))
       }
     }
     return
