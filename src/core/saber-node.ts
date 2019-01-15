@@ -35,17 +35,20 @@ export namespace Terminal {
      * error
      * @param message
      */
-    export const error = (message: string) => console.log('\x1b[31m', message)
+    export const error = (message: string) =>
+      console.log(`\u001b[31m${message}\u001b[37m`)
     /**
      * success
      * @param message
      */
-    export const success = (message: string) => console.log('\x1b[32m', message)
+    export const success = (message: string) =>
+      console.log(`\u001b[32m${message}\u001b[37m`)
     /**
      * tips
      * @param message
      */
-    export const tips = (message: string) => console.log('\x1b[34m', message)
+    export const tips = (message: string) =>
+      console.log(`\u001b[34m${message}\u001b[37m`)
   }
 }
 /**

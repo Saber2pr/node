@@ -1,5 +1,8 @@
-import { File, Server } from '../core/saber-node'
+import { File, Server, Terminal } from '../core/saber-node'
 export async function test_saber_node() {
-  Server.create(2333, './__server')
+  Terminal.Print.error('test')
+  Terminal.Print.success('test')
+  Terminal.Print.tips('test')
+
   return
 }
