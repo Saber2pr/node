@@ -5,7 +5,19 @@
  * @Last Modified time: 2019-01-14 09:15:46
  */
 import { createInterface } from 'readline'
-import { exists, writeFile, mkdir, PathLike, appendFile, readFile } from 'fs'
+import {
+  exists,
+  writeFile,
+  mkdir,
+  PathLike,
+  appendFile,
+  readFile,
+  existsSync,
+  readdirSync,
+  statSync,
+  unlinkSync,
+  rmdirSync
+} from 'fs'
 import { dirname, resolve } from 'path'
 import { createServer, IncomingMessage, ServerResponse } from 'http'
 /**
@@ -67,8 +79,7 @@ export namespace Path {
    * isExist
    * @param path
    */
-  export const isExist = (path: string): Promise<boolean> =>
-    new Promise(resolve => exists(path, exists => resolve(exists)))
+  export const isExist = (path: string): boolean => existsSync(path)
 }
 /**
  * @exports File
@@ -137,6 +148,21 @@ export namespace File {
         }
       })
     )
+  export const remove = (path: string) => {
+    let files = []
+    if (existsSync(path)) {
+      files = readdirSync(path)
+      files.forEach(file => {
+        let curPath = path + '/' + file
+        if (statSync(curPath).isDirectory()) {
+          remove(curPath)
+        } else {
+          unlinkSync(curPath)
+        }
+      })
+      rmdirSync(path)
+    }
+  }
   /**
    * json
    */

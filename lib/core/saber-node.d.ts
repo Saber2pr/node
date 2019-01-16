@@ -43,7 +43,7 @@ export declare namespace Path {
      * isExist
      * @param path
      */
-    const isExist: (path: string) => Promise<boolean>;
+    const isExist: (path: string) => boolean;
 }
 /**
  * @exports File
@@ -77,6 +77,7 @@ export declare namespace File {
      * @param path
      */
     const read: (path: string) => Promise<string>;
+    const remove: (path: string) => void;
     /**
      * json
      */
