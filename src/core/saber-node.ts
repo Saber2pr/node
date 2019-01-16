@@ -148,6 +148,10 @@ export namespace File {
         }
       })
     )
+  /**
+   * remove
+   * @param path
+   */
   export const remove = (path: string) => {
     let files = []
     if (existsSync(path)) {

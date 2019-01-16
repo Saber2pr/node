@@ -77,6 +77,10 @@ export declare namespace File {
      * @param path
      */
     const read: (path: string) => Promise<string>;
+    /**
+     * remove
+     * @param path
+     */
     const remove: (path: string) => void;
     /**
      * json
