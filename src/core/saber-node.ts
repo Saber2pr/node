@@ -40,6 +40,10 @@ export namespace Terminal {
       })
     })
   /**
+   * getParams
+   */
+  export const getParams = () => process.argv.slice(2)
+  /**
    * Print
    */
   export namespace Print {

@@ -10,6 +10,10 @@ export declare namespace Terminal {
      */
     const getUserInput: (question: string) => Promise<string>;
     /**
+     * getParams
+     */
+    const getParams: () => string[];
+    /**
      * Print
      */
     namespace Print {
