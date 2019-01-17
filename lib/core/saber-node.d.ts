@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { PathLike } from 'fs';
+import { PathLike, Stats } from 'fs';
 /**
  * @exports Terminal
  */
@@ -81,6 +81,24 @@ export declare namespace File {
      * @param path
      */
     const read: <T = string>(path: string) => Promise<T>;
+    /**
+     * readDir
+     * @param filePath
+     */
+    const readDir: (filePath: string) => Promise<string[]>;
+    /**
+     * fileStat
+     * @param filedir
+     */
+    const fileStat: (filedir: string) => Promise<Stats>;
+    /**
+     * fileDisplay
+     *
+     * @export
+     * @param {string} filePath
+     * @returns
+     */
+    function dirDeepSearch(filePath: string): Promise<string[]>;
     /**
      * remove
      * @param path

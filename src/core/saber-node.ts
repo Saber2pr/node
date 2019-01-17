@@ -16,9 +16,12 @@ import {
   readdirSync,
   statSync,
   unlinkSync,
-  rmdirSync
+  rmdirSync,
+  readdir,
+  stat,
+  Stats
 } from 'fs'
-import { dirname, resolve } from 'path'
+import { dirname, resolve, join } from 'path'
 import { createServer, IncomingMessage, ServerResponse } from 'http'
 /**
  * @exports Terminal
@@ -153,6 +156,58 @@ export namespace File {
         }
       })
     )
+  /**
+   * readDir
+   * @param filePath
+   */
+  export const readDir = async (filePath: string) =>
+    new Promise<string[]>((resolve, reject) =>
+      readdir(filePath, (err, files) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(files)
+        }
+      })
+    )
+  /**
+   * fileStat
+   * @param filedir
+   */
+  export const fileStat = async (filedir: string) =>
+    new Promise<Stats>((resolve, reject) =>
+      stat(filedir, (err, stats) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(stats)
+        }
+      })
+    )
+  /**
+   * fileDisplay
+   *
+   * @export
+   * @param {string} filePath
+   * @returns
+   */
+  export async function dirDeepSearch(filePath: string) {
+    const result: string[] = []
+    const search = async filePath => {
+      const files = await readDir(filePath)
+      for (const filename of files) {
+        let filedir = join(filePath, filename)
+        const stats = await fileStat(filedir)
+        if (stats.isFile()) {
+          result.push(filedir)
+        } else if (stats.isDirectory()) {
+          await search(filedir)
+        }
+      }
+    }
+    await search(filePath)
+    return result
+  }
   /**
    * remove
    * @param path
