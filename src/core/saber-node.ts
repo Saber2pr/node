@@ -138,13 +138,14 @@ export namespace File {
    * read
    * @param path
    */
-  export const read = async (path: string) =>
-    new Promise<string>((resolve, reject) =>
+  export const read = async <T = string>(path: string) =>
+    new Promise<T>((resolve, reject) =>
       readFile(path, (err, res) => {
         if (err) {
           reject(err)
         } else {
-          resolve(res.toString())
+          const str: any = res.toString()
+          resolve(str)
         }
       })
     )
