@@ -92,13 +92,21 @@ export declare namespace File {
      */
     const fileStat: (filedir: string) => Promise<Stats>;
     /**
-     * fileDisplay
+     * dirDeepSearch
      *
      * @export
      * @param {string} filePath
      * @returns
      */
     function dirDeepSearch(filePath: string): Promise<string[]>;
+    /**
+     * dirDeepSearchAll
+     *
+     * @export
+     * @param {string[]} dirs
+     * @returns
+     */
+    function dirDeepSearchAll(dirs: string[]): Promise<string[]>;
     /**
      * remove
      * @param path

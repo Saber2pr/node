@@ -185,7 +185,7 @@ export namespace File {
       })
     )
   /**
-   * fileDisplay
+   * dirDeepSearch
    *
    * @export
    * @param {string} filePath
@@ -206,6 +206,21 @@ export namespace File {
       }
     }
     await search(filePath)
+    return result
+  }
+  /**
+   * dirDeepSearchAll
+   *
+   * @export
+   * @param {string[]} dirs
+   * @returns
+   */
+  export async function dirDeepSearchAll(dirs: string[]) {
+    const result: string[] = []
+    for (const dir of dirs) {
+      const files = await File.dirDeepSearch(dir)
+      result.push(...files)
+    }
     return result
   }
   /**
