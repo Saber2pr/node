@@ -95,10 +95,10 @@ export declare namespace File {
      * dirDeepSearch
      *
      * @export
-     * @param {string} filePath
+     * @param {string} dir
      * @returns
      */
-    function dirDeepSearch(filePath: string): Promise<string[]>;
+    function dirDeepSearch(dir: string): Promise<string[]>;
     /**
      * dirDeepSearchAll
      *
@@ -121,6 +121,22 @@ export declare namespace File {
          * @param path
          */
         const pipe: <T>(path: string) => (callback: (fileData: T) => T) => Promise<void>;
+    }
+    /**
+     * Node
+     * @exports
+     */
+    namespace Node {
+        /**
+         * getPackageDir
+         * @param packageName
+         */
+        const getPackageDir: (packageName: string) => string;
+        /**
+         * getPackageFiles
+         * @param dir
+         */
+        const getPackageFiles: (dir: string) => Promise<string[]>;
     }
 }
 /**

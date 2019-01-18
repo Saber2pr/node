@@ -188,15 +188,15 @@ export namespace File {
    * dirDeepSearch
    *
    * @export
-   * @param {string} filePath
+   * @param {string} dir
    * @returns
    */
-  export async function dirDeepSearch(filePath: string) {
+  export async function dirDeepSearch(dir: string) {
     const result: string[] = []
-    const search = async filePath => {
-      const files = await readDir(filePath)
+    const search = async dir => {
+      const files = await readDir(dir)
       for (const filename of files) {
-        let filedir = join(filePath, filename)
+        let filedir = join(dir, filename)
         const stats = await fileStat(filedir)
         if (stats.isFile()) {
           result.push(filedir)
@@ -205,7 +205,7 @@ export namespace File {
         }
       }
     }
-    await search(filePath)
+    await search(dir)
     return result
   }
   /**
@@ -252,7 +252,7 @@ export namespace File {
      */
     export const pipe = <T>(path: string) => async (
       callback: (fileData: T) => T
-    ) => {
+    ) =>
       await File.createFile(
         path,
         JSON.stringify(
@@ -261,8 +261,25 @@ export namespace File {
           2
         )
       )
-      return
-    }
+  }
+  /**
+   * Node
+   * @exports
+   */
+  export namespace Node {
+    /**
+     * getPackageDir
+     * @param packageName
+     */
+    export const getPackageDir = (packageName: string) =>
+      `${process.cwd()}/node_modules/${packageName}`
+    /**
+     * getPackageFiles
+     * @param dir
+     */
+
+    export const getPackageFiles = async (dir: string) =>
+      await File.dirDeepSearch(getPackageDir(dir))
   }
 }
 /**
