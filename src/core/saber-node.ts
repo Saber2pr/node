@@ -88,6 +88,16 @@ export namespace Path {
    * @param path
    */
   export const isExist = (path: string): boolean => existsSync(path)
+  /**
+   * slashCount
+   * @param str
+   */
+  export const slashCount = (str: string): number => str.split('/').length - 1
+  /**
+   * makePathStep
+   * @param num
+   */
+  export const makePathStep = (num: number): string => '../'.repeat(num)
 }
 /**
  * @exports File

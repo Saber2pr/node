@@ -48,6 +48,16 @@ export declare namespace Path {
      * @param path
      */
     const isExist: (path: string) => boolean;
+    /**
+     * slashCount
+     * @param str
+     */
+    const slashCount: (str: string) => number;
+    /**
+     * makePathStep
+     * @param num
+     */
+    const makePathStep: (num: number) => string;
 }
 /**
  * @exports File
