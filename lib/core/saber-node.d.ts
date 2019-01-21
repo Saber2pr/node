@@ -121,6 +121,11 @@ export declare namespace File {
          * @param path
          */
         const pipe: <T>(path: string) => (callback: (fileData: T) => T) => Promise<void>;
+        /**
+         * read json
+         * @param json
+         */
+        const read: <T>(json: string) => Promise<T>;
     }
     /**
      * Node

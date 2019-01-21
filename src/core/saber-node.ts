@@ -261,6 +261,12 @@ export namespace File {
           2
         )
       )
+    /**
+     * read json
+     * @param json
+     */
+    export const read = async <T>(json: string) =>
+      JSON.parse(await File.read(json)) as T
   }
   /**
    * Node

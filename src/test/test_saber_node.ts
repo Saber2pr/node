@@ -3,6 +3,6 @@ export async function test_saber_node() {
   // Terminal.Print.error('test')
   // Terminal.Print.success('test')
   // Terminal.Print.tips('test')
-  console.log(await File.dirDeepSearch(`${process.cwd()}/__server`))
+  console.log(await File.read(`${process.cwd()}/package.json`))
   return
 }
