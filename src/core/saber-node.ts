@@ -19,7 +19,8 @@ import {
   rmdirSync,
   readdir,
   stat,
-  Stats
+  Stats,
+  readFileSync
 } from 'fs'
 import { dirname, resolve, join } from 'path'
 import { createServer, IncomingMessage, ServerResponse } from 'http'
@@ -265,8 +266,8 @@ export namespace File {
      * read json
      * @param json
      */
-    export const read = async <T>(json: string) =>
-      JSON.parse(await File.read(json)) as T
+    export const read = <T>(json: string) =>
+      JSON.parse(readFileSync(json) as any) as T
   }
   /**
    * Node

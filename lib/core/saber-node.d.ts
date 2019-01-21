@@ -125,7 +125,7 @@ export declare namespace File {
          * read json
          * @param json
          */
-        const read: <T>(json: string) => Promise<T>;
+        const read: <T>(json: string) => T;
     }
     /**
      * Node
