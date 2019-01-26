@@ -58,6 +58,14 @@ export declare namespace Path {
      * @param num
      */
     const makePathStep: (num: number) => string;
+    /**
+     * split
+     * @param name
+     */
+    const split: (name: string) => {
+        str: string;
+        type: string;
+    };
 }
 /**
  * @exports File

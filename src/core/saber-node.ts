@@ -98,6 +98,18 @@ export namespace Path {
    * @param num
    */
   export const makePathStep = (num: number): string => '../'.repeat(num)
+  /**
+   * split
+   * @param name
+   */
+  export const split = (name: string) => {
+    const strArr = name.split('.')
+    const type = strArr.pop()
+    return {
+      str: strArr.join('.'),
+      type
+    }
+  }
 }
 /**
  * @exports File
