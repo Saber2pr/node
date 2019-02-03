@@ -152,6 +152,25 @@ export namespace File {
       appendFile(filePath, value, err => resolve(err))
     })
   /**
+   * joinFile
+   *
+   * @export
+   * @param {string} filePath
+   * @param {string} anchorContent
+   * @param {string} joinContent
+   */
+  export async function joinFile(
+    filePath: string,
+    anchorContent: string,
+    joinContent: string
+  ) {
+    const res = await File.read(filePath)
+    await File.writeFileAsync(
+      filePath,
+      res.replace(anchorContent, anchorContent.concat(joinContent))
+    )
+  }
+  /**
    * createDir
    * @param path
    */

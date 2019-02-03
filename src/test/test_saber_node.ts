@@ -3,6 +3,11 @@ export async function test_saber_node() {
   // Terminal.Print.error('test')
   // Terminal.Print.success('test')
   // Terminal.Print.tips('test')
-  console.log(File.Json.read(`${process.cwd()}/paakage.json`))
+  File.joinFile(
+    `${process.cwd()}/src/test/temp.ts`,
+    'namespace Test {',
+    `const test = 'test';`
+  )
+
   return
 }

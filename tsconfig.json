@@ -10,6 +10,6 @@
       "es2015.promise"
     ]
   },
-  "include": ["src"],
+  "include": ["src", "src/test/temp.ts"],
   "exclude": ["node_modules"]
 }

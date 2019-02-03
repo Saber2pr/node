@@ -90,6 +90,15 @@ export declare namespace File {
      */
     const push: (filePath: string, value: any) => Promise<NodeJS.ErrnoException>;
     /**
+     * joinFile
+     *
+     * @export
+     * @param {string} filePath
+     * @param {string} anchorContent
+     * @param {string} joinContent
+     */
+    function joinFile(filePath: string, anchorContent: string, joinContent: string): Promise<void>;
+    /**
      * createDir
      * @param path
      */
