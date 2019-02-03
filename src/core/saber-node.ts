@@ -122,19 +122,26 @@ export namespace File {
    */
   export const createFile = async (filePath: string, value: string) => {
     const fileFolderPath = dirname(filePath)
-    if (!(await Path.isExist(fileFolderPath))) {
+    if (!Path.isExist(fileFolderPath)) {
       await createPath(fileFolderPath)
-      writeFile(filePath, value, 'utf-8', err =>
-        !!err ? console.log(err) : null
-      )
+      await writeFileAsync(filePath, value)
       return
     } else {
-      writeFile(filePath, value, 'utf-8', err =>
-        !!err ? console.log(err) : null
-      )
+      await writeFileAsync(filePath, value)
       return
     }
   }
+  /**
+   * writeFileAsync
+   * @param filePath
+   * @param value
+   */
+  export const writeFileAsync = (filePath: string, value: string) =>
+    new Promise((resolve, reject) =>
+      writeFile(filePath, value, 'utf8', err =>
+        !!err ? reject(err) : resolve()
+      )
+    )
   /**
    * push
    * @param filePath
@@ -156,7 +163,7 @@ export namespace File {
    * @returns {Promise<any>}
    */
   export const createPath = async (path: string): Promise<any> => {
-    if (await Path.isExist(path)) {
+    if (Path.isExist(path)) {
       return
     } else {
       await createPath(dirname(path))

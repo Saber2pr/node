@@ -78,6 +78,12 @@ export declare namespace File {
      */
     const createFile: (filePath: string, value: string) => Promise<void>;
     /**
+     * writeFileAsync
+     * @param filePath
+     * @param value
+     */
+    const writeFileAsync: (filePath: string, value: string) => Promise<{}>;
+    /**
      * push
      * @param filePath
      * @param value
