@@ -6,10 +6,9 @@
     "outDir": "./lib",
     "esModuleInterop": true,
     "lib": [
-      "esnext",
-      "es2015.promise"
+     "dom",
+     "es2015"
     ]
   },
-  "include": ["src", "src/test/temp.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "lib"]
 }

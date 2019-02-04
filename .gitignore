@@ -1,7 +1,5 @@
 node_modules/
 package-lock.json
-dist/
 .vscode/
 build/
-__test__
-__server/
+lib/
