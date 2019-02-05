@@ -1,12 +1,10 @@
 /*
- * @Author: AK-12
- * @Date: 2019-01-11 21:41:32
- * @Last Modified by: AK-12
- * @Last Modified time: 2019-01-14 09:15:46
+ * @Author: saber2pr
+ * @Date: 2019-02-05 11:36:32
+ * @Last Modified by: saber2pr
+ * @Last Modified time: 2019-02-05 11:36:54
  */
-import { createInterface } from 'readline'
 import {
-  exists,
   writeFile,
   mkdir,
   PathLike,
@@ -22,95 +20,8 @@ import {
   Stats,
   readFileSync
 } from 'fs'
-import { dirname, resolve, join } from 'path'
-import { createServer, IncomingMessage, ServerResponse } from 'http'
-/**
- * @exports Terminal
- */
-export namespace Terminal {
-  /**
-   * getUserInput
-   * @param question
-   */
-  export const getUserInput = (question: string): Promise<string> =>
-    new Promise(resolve => {
-      const terminal = createInterface({
-        input: process.stdin,
-        output: process.stdout
-      })
-      terminal.question(question, answer => {
-        terminal.close()
-        resolve(answer.trim())
-      })
-    })
-  /**
-   * getParams
-   */
-  export const getParams = () => process.argv.slice(2)
-  /**
-   * Print
-   */
-  export namespace Print {
-    /**
-     * error
-     * @param message
-     */
-    export const error = (message: string) =>
-      console.log(`\u001b[31m${message}\u001b[37m`)
-    /**
-     * success
-     * @param message
-     */
-    export const success = (message: string) =>
-      console.log(`\u001b[32m${message}\u001b[37m`)
-    /**
-     * tips
-     * @param message
-     */
-    export const tips = (message: string) =>
-      console.log(`\u001b[34m${message}\u001b[37m`)
-  }
-}
-/**
- * @exports Path
- */
-export namespace Path {
-  /**
-   * getFileName
-   * @param path
-   */
-  export const getFileName = (path: string): string => {
-    const solve = path.split('/')
-    return solve[solve.length - 1]
-  }
-  /**
-   * isExist
-   * @param path
-   */
-  export const isExist = (path: string): boolean => existsSync(path)
-  /**
-   * slashCount
-   * @param str
-   */
-  export const slashCount = (str: string): number => str.split('/').length - 1
-  /**
-   * makePathStep
-   * @param num
-   */
-  export const makePathStep = (num: number): string => '../'.repeat(num)
-  /**
-   * split
-   * @param name
-   */
-  export const split = (name: string) => {
-    const strArr = name.split('.')
-    const type = strArr.pop()
-    return {
-      str: strArr.join('.'),
-      type
-    }
-  }
-}
+import { dirname, join } from 'path'
+import { Path } from './path'
 /**
  * @exports File
  */
@@ -336,60 +247,4 @@ export namespace File {
     export const getPackageFiles = async (dir: string) =>
       await File.dirDeepSearch(getPackageDir(dir))
   }
-}
-/**
- * Server
- */
-export namespace Server {
-  /**
-   * getFromRequest
-   * @param req
-   */
-  const getFromRequest = (req: IncomingMessage) =>
-    new Promise<string>((resolve, reject) => {
-      let str = ''
-      req.on('data', data => (str += data))
-      req.on('end', () => resolve(str))
-      req.on('error', err => reject(err))
-    })
-  /**
-   * requestListener
-   * @param req
-   * @param res
-   * @param rootDir
-   */
-  const requestListener = (rootDir: string) => async (
-    req: IncomingMessage,
-    res: ServerResponse
-  ) => {
-    const url = resolve(rootDir + req.url)
-    if (req.method === 'GET') {
-      File.read(url)
-        .then(data => res.write(data))
-        .then(() => res.end())
-        .catch(err => console.log(err))
-      return
-    } else if (req.method === 'POST') {
-      const data_fromReq = await getFromRequest(req)
-      if (await Path.isExist(url)) {
-        File.push(url, data_fromReq)
-          .then(() => res.end())
-          .catch(err => console.log(err))
-      } else {
-        File.createFile(url, data_fromReq)
-          .then(() => res.end())
-          .catch(err => console.log(err))
-      }
-    }
-    return
-  }
-  /**
-   * create
-   * @param port
-   * @param rootDir
-   */
-  export const create = (port: number, rootDir: string = '/') =>
-    createServer(requestListener(rootDir)).listen(port, 'localhost', () =>
-      console.log(`http://localhost:${port}/index.html`)
-    )
 }
