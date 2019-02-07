@@ -156,7 +156,7 @@ export namespace File {
     const search = async dir => {
       const files = await readDir(dir)
       for (const filename of files) {
-        let filedir = join(dir, filename)
+        const filedir = join(dir, filename)
         const stats = await fileStat(filedir)
         if (stats.isFile()) {
           result.push(filedir)
@@ -241,10 +241,9 @@ export namespace File {
       `${process.cwd()}/node_modules/${packageName}`
     /**
      * getPackageFiles
-     * @param dir
+     * @param packageName
      */
-
-    export const getPackageFiles = async (dir: string) =>
-      await File.dirDeepSearch(getPackageDir(dir))
+    export const getPackageFiles = async (packageName: string) =>
+      await File.dirDeepSearch(getPackageDir(packageName))
   }
 }
