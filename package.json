@@ -1,13 +1,20 @@
 {
-  "name": "saber-node",
-  "version": "1.3.0",
+  "name": "@saber2pr/node",
+  "version": "0.0.1",
   "description": "utils for nodejs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Saber2pr/saber-node.git"
+    "url": "git+https://github.com/Saber2pr/-saber2pr-node.git"
   },
   "author": "saber2pr",
   "license": "ISC",
+  "files": [
+    "lib/core/*",
+    "lib/index.*"
+  ],
+  "keywords": [
+    "node"
+  ],
   "main": "./lib/index.js",
   "scripts": {
     "start": "tsc --watch",

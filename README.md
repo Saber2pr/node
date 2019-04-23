@@ -1,23 +1,17 @@
-# saber-node
+# @saber2pr/node
 
 > utils for nodejs
 
 `Terminal` - getUserInput
 
-`File` - read, write
-
-`Server` - create
-
-...
-
-``
+`File`
 
 ```bash
 # from npm
-npm install saber-node
+npm install @saber2pr/node
 
 # from github
-git clone https://github.com/Saber2pr/saber-node.git
+git clone https://github.com/Saber2pr/-saber2pr-node.git
 ```
 
 ## start
