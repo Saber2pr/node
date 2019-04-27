@@ -36,11 +36,16 @@ export namespace FS {
       fs.readdir(dir, (err, files) => (err ? reject(err) : resolve(files)))
     )
 
-  export const search = async (path: string, type: 'file' | 'dir' = 'file') => {
+  export const search = async (
+    path: string,
+    type: 'file' | 'dir' = 'file',
+    exclude: string[] = ['./node_modules', './.git']
+  ) => {
     const stack = [path]
     const result: string[] = []
     while (stack.length) {
       const current = stack.pop()
+      if (exclude.includes(current)) continue
       const isDir = await stat(current, 'dir')
       const isFile = await stat(current, 'file')
       if (isDir) {

@@ -8,7 +8,7 @@ import { FS } from '../core/file'
 
 // FS.readdir('./lib').then(console.log)
 
-// FS.search('./lib').then(console.log)
+FS.search('.', 'file').then(console.log)
 
 // FS.mkPath('./__test__/test').then(() => {
 //   FS.writeFile('./__test__/test/sayHello', 'hello')
