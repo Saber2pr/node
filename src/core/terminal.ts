@@ -21,12 +21,14 @@ export namespace Terminal {
 
   export const getParams = () => process.argv.slice(2)
 
-  export const error = (message: string) =>
-    console.log(`\u001b[31m${message}\u001b[37m`)
+  export namespace Print {
+    export const error = (message: string) =>
+      console.log(`\u001b[31m${message}\u001b[37m`)
 
-  export const success = (message: string) =>
-    console.log(`\u001b[32m${message}\u001b[37m`)
+    export const success = (message: string) =>
+      console.log(`\u001b[32m${message}\u001b[37m`)
 
-  export const tips = (message: string) =>
-    console.log(`\u001b[34m${message}\u001b[37m`)
+    export const tips = (message: string) =>
+      console.log(`\u001b[34m${message}\u001b[37m`)
+  }
 }

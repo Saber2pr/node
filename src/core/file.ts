@@ -37,7 +37,7 @@ export namespace FS {
     )
 
   export const search = async (
-    path: string,
+    path: string = '.',
     type: 'file' | 'dir' = 'file',
     exclude: string[] = ['./node_modules', './.git']
   ) => {
