@@ -37,15 +37,15 @@ export namespace FS {
     )
 
   export const search = async (
-    path: string = '.',
+    path: string = process.cwd(),
     type: 'file' | 'dir' = 'file',
-    exclude: string[] = ['./node_modules', './.git']
+    exclude: string[] = ['/node_modules', '/.git']
   ) => {
     const stack = [path]
     const result: string[] = []
     while (stack.length) {
       const current = stack.pop()
-      if (exclude.includes(current)) continue
+      if (exclude.map(p => process.cwd() + p).includes(current)) continue
       const isDir = await stat(current, 'dir')
       const isFile = await stat(current, 'file')
       if (isDir) {
