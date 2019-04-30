@@ -4,6 +4,8 @@
  * @Last Modified by: saber2pr
  * @Last Modified time: 2019-04-30 20:34:39
  */
+import { OutgoingHttpHeaders } from 'http'
+
 export interface Headers {
   'Access-Control-Allow-Credentials'?: string
   'Access-Control-Allow-Origin'?: string
@@ -85,7 +87,7 @@ export class Header<T extends AnyHeaders = {}> {
     return this
   }
 
-  public getHeaders() {
+  public getHeaders(): OutgoingHttpHeaders {
     return this.headers
   }
 
