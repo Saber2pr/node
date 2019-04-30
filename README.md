@@ -2,6 +2,14 @@
 
 > utils for nodejs
 
+```bash
+# from npm
+npm install @saber2pr/node
+
+# from github
+git clone https://github.com/Saber2pr/-saber2pr-node.git
+```
+
 # API
 
 ## FS
@@ -78,13 +86,52 @@
 
    > 命令行输出 `提示`
 
-```bash
-# from npm
-npm install @saber2pr/node
+## Http
 
-# from github
-git clone https://github.com/Saber2pr/-saber2pr-node.git
-```
+1. cookie
+
+   > 把一个对象转为 `cookie` 字符串
+
+2. query
+
+   > 从 `request` 从获取 url 参数
+
+## Http.header
+
+1. append
+
+   > 追加`响应头`
+
+   ```ts
+   Http.header.append('Access-Control-Allow-Credentials', 'false').append({
+     'Accept-Patch': '',
+     Connection: ''
+   })
+   ```
+
+2. getHeaders
+
+   > 获取 `header 对象`
+
+   ```ts
+   Http.header.getHeaders()
+   ```
+
+3. remove
+
+   > 删除`一个`字段
+
+   ```ts
+   Http.header.remove('Accept-Patch')
+   ```
+
+4. clearAll
+
+   > 删除`所有`字段
+
+   ```ts
+   Http.header.clearAll()
+   ```
 
 ## start
 

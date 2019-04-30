@@ -65,19 +65,37 @@ export class Header<T extends AnyHeaders = {}> {
   constructor(extraHeaders: T = <T>{}) {
     getHeadersEntries(extraHeaders).forEach(([k, v]) => this.append(k, v))
   }
+
   private headers: HeadersType<T> = <HeadersType<T>>DefaultHeaders
+
+  public append(extraHeaders: Partial<HeadersType<T>>): this
   public append<K extends keyof HeadersType<T>>(
     key: K,
     value: HeadersType<T>[K]
-  ) {
-    Object.assign(this.headers, { [key]: value })
+  ): this
+  public append<K extends keyof HeadersType<T>>(
+    key: Partial<T> | K,
+    value?: HeadersType<T>[K]
+  ): this {
+    if (typeof key === 'object') {
+      Object.assign(this.headers, key)
+    } else {
+      Object.assign(this.headers, { [key]: value })
+    }
     return this
   }
+
   public getHeaders() {
     return this.headers
   }
+
   public remove(key: keyof HeadersType<T>) {
     key in this.headers && delete this.headers[key]
+    return this
+  }
+
+  public clearAll() {
+    this.headers = <HeadersType<T>>{}
     return this
   }
 }
