@@ -8,9 +8,10 @@ import { IncomingMessage } from 'http'
 import url from 'url'
 
 export const query = <T>(request: IncomingMessage): Promise<T> => {
-  if (request.method === 'GET') {
-    return Promise.resolve(url.parse(request.url, true).query as any)
-  } else if (request.method === 'POST') {
+  const param = url.parse(request.url, true).query
+  if (Object.keys(param).length) {
+    return Promise.resolve(param as any)
+  } else {
     return new Promise((resolve, reject) => {
       let res = ''
       request.on('data', chunk => (res += chunk))
@@ -22,7 +23,5 @@ export const query = <T>(request: IncomingMessage): Promise<T> => {
         })
       )
     })
-  } else {
-    return Promise.reject('only get or post.')
   }
 }

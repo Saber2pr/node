@@ -94,7 +94,7 @@ git clone https://github.com/Saber2pr/-saber2pr-node.git
 
 2. query
 
-   > 从 `request` 从获取 url 参数
+   > 从 `request` 从获取参数
 
 ## Http.header
 
