@@ -92,7 +92,11 @@ git clone https://github.com/Saber2pr/-saber2pr-node.git
 
    > 把一个对象转为 `cookie` 字符串
 
-2. query
+2. deCookie
+
+   > 把一个 `cookie` 字符串转为对象
+
+3. query
 
    > 从 `request` 从获取参数
 
@@ -132,6 +136,14 @@ git clone https://github.com/Saber2pr/-saber2pr-node.git
    ```ts
    Http.header.clearAll()
    ```
+
+## Http.Exception
+
+> http 异常类，继承自`Error`
+
+1. Http.Exception.resolve
+
+> 把一个 HttpException 发送 ServerResponse
 
 ## start
 
