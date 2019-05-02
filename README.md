@@ -102,40 +102,7 @@ git clone https://github.com/Saber2pr/-saber2pr-node.git
 
 ## Http.header
 
-1. append
-
-   > 追加`响应头`
-
-   ```ts
-   Http.header.append('Access-Control-Allow-Credentials', 'false').append({
-     'Accept-Patch': '',
-     Connection: ''
-   })
-   ```
-
-2. getHeaders
-
-   > 获取 `header 对象`
-
-   ```ts
-   Http.header.getHeaders()
-   ```
-
-3. remove
-
-   > 删除`一个`字段
-
-   ```ts
-   Http.header.remove('Accept-Patch')
-   ```
-
-4. clearAll
-
-   > 删除`所有`字段
-
-   ```ts
-   Http.header.clearAll()
-   ```
+> response 的代理
 
 ## Http.Exception
 
