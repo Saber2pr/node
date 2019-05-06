@@ -17,7 +17,7 @@ export function setHeader(
 
 export function setHeaders(
   response: ServerResponse,
-  headers: Record<Headers, string | number | string[]>
+  headers: Partial<Record<Headers, string | number | string[]>>
 ) {
   const keyValues: Array<
     [Headers, string | number | string[]]
@@ -48,7 +48,7 @@ export function removeHeader(response: ServerResponse, name: Headers) {
 export function writeHead(
   response: ServerResponse,
   statusCode: number,
-  headers: Record<Headers, string | number | string[]>
+  headers: Partial<Record<Headers, string | number | string[]>>
 ) {
   response.writeHead(statusCode, headers)
 }
