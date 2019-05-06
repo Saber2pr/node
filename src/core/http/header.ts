@@ -9,6 +9,7 @@ export type Headers =
   | 'Access-Control-Allow-Methods'
   | 'Access-Control-Allow-Credentials'
   | 'Access-Control-Allow-Origin'
+  | 'Access-Control-Max-Age'
   | 'Accept-Patch'
   | 'Accept-Ranges'
   | 'Age'
