@@ -15,6 +15,16 @@ export function setHeader(
   response.setHeader(name, value)
 }
 
+export function setHeaders(
+  response: ServerResponse,
+  headers: Record<Headers, string | number | string[]>
+) {
+  const keyValues: Array<
+    [Headers, string | number | string[]]
+  > = Object.entries(headers) as any
+  keyValues.forEach(([k, v]) => setHeader(response, k, v))
+}
+
 export function getHeader(response: ServerResponse, name: Headers) {
   return response.getHeader(name)
 }
