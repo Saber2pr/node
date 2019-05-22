@@ -7,7 +7,7 @@
 npm install @saber2pr/node
 
 # from github
-git clone https://github.com/Saber2pr/-saber2pr-node.git
+git clone https://github.com/Saber2pr/node.git
 ```
 
 # API

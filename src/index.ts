@@ -1,4 +1,3 @@
-export * from './core/terminal'
-export * from './core/file'
-export * from './core/http'
-export * from './core/http/header'
+export * from './core/Terminal'
+export * from './core/File'
+export * from './core/Http'

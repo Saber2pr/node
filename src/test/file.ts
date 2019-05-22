@@ -1,4 +1,4 @@
-import { FS } from '../core/file'
+import { FS } from '../core/File'
 
 // FS.exists('./lib').then(console.log)
 

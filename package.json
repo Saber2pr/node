@@ -4,7 +4,7 @@
   "description": "utils for nodejs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Saber2pr/-saber2pr-node.git"
+    "url": "git+https://github.com/Saber2pr/node.git"
   },
   "author": "saber2pr",
   "license": "ISC",

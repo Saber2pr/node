@@ -2,9 +2,9 @@
  * @Author: saber2pr
  * @Date: 2019-04-30 19:36:26
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-05-02 20:45:09
+ * @Last Modified time: 2019-05-22 18:27:30
  */
-export type Headers =
+export type Header =
   | 'Access-Control-Allow-Headers'
   | 'Access-Control-Allow-Methods'
   | 'Access-Control-Allow-Credentials'
@@ -45,3 +45,5 @@ export type Headers =
   | 'Via'
   | 'Warning'
   | 'WWW-Authenticate'
+
+export type Headers = Partial<Record<Header, string | number | string[]>>
