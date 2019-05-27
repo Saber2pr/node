@@ -7,25 +7,47 @@
 import { stat } from './stat'
 import { readdir } from './readdir'
 
+export interface SearchNode {
+  depth: number
+  path: string
+}
+
 export const search = async (
-  path: string = process.cwd(),
+  path: string,
   type: 'file' | 'dir' = 'file',
-  exclude: string[] = ['/node_modules', '/.git']
+  maxDepth = 100
 ) => {
-  const stack = [path]
-  const result: string[] = []
-  while (stack.length) {
-    const current = stack.pop()
-    if (exclude.map(p => process.cwd() + p).includes(current)) continue
-    const isDir = await stat(current, 'dir')
-    const isFile = await stat(current, 'file')
-    if (isDir) {
-      const children = await readdir(current)
-      children.length &&
-        children.forEach(child => stack.push(`${current}/${child}`))
+  const queue: Array<SearchNode> = [
+    {
+      path,
+      depth: 0
     }
-    type === 'file' && isFile && result.push(current)
-    type === 'dir' && isDir && result.push(current)
+  ]
+
+  const result: string[] = []
+
+  while (queue.length) {
+    const current = queue.shift()
+
+    if (current.depth > maxDepth) break
+
+    const isDir = await stat(current.path, 'dir')
+    const isFile = await stat(current.path, 'file')
+
+    if (isDir) {
+      const childrenPath = await readdir(current.path)
+
+      childrenPath.length &&
+        childrenPath.forEach(child =>
+          queue.push({
+            depth: current.depth + 1,
+            path: `${current.path}/${child}`
+          })
+        )
+    }
+
+    type === 'file' && isFile && result.push(current.path)
+    type === 'dir' && isDir && result.push(current.path)
   }
   return result
 }

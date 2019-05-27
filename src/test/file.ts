@@ -1,21 +1,9 @@
 import { FS } from '../core/File'
 
-// FS.exists('./lib').then(console.log)
+async function test() {
+  const files = await FS.search(process.cwd() + '/src', 'file', 2)
 
-// FS.stat(`./lib`, 'dir').then(console.log)
+  console.log(files)
+}
 
-// FS.readFile('./lib/index.js').then(res => console.log(res.toString()))
-
-// FS.readdir('./lib').then(console.log)
-
-FS.search().then(console.log)
-
-// FS.mkPath('./__test__/core/ttt/cc')
-
-// FS.mkPath('./__test__/test').then(() => {
-//   FS.writeFile('./__test__/test/sayHello', 'hello')
-//   FS.writeFile('./__test__/test/sayHello1', 'hello1')
-//   FS.writeFile('./__test__/test/sayHello2', 'hello2')
-// })
-
-// FS.remove('./__test__')
+test()
