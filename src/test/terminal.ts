@@ -1,3 +1,3 @@
 import { Terminal } from '..'
 
-Terminal.getCurrentPkgConfig().then(pkg => console.log(pkg.version))
+Terminal.getCurrentPkgConfig(__dirname).then(pkg => console.log(pkg.version))

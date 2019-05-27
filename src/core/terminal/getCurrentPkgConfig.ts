@@ -9,8 +9,12 @@ import { Package } from '../package'
 
 let CALLSTACKLEN = 0
 
+/**
+ * @param path __dirname
+ * @param step
+ */
 export async function getCurrentPkgConfig(
-  path: string = __dirname,
+  path: string,
   step = ''
 ): Promise<Package> {
   CALLSTACKLEN++
