@@ -1,1 +1,1 @@
-import './http'
+import './terminal'
