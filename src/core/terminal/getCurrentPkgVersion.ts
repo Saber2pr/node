@@ -5,13 +5,14 @@
  * @Last Modified time: 2019-05-27 20:45:44
  */
 import { FS } from '../File'
+import { Package } from '../package'
 
 let CALLSTACKLEN = 0
 
-export async function getCurrentPkgVersion(
+export async function getCurrentPkgConfig(
   path: string = __dirname,
   step = ''
-) {
+): Promise<Package> {
   CALLSTACKLEN++
   if (CALLSTACKLEN > 10) {
     CALLSTACKLEN = null
@@ -20,10 +21,10 @@ export async function getCurrentPkgVersion(
 
   try {
     const buffer = await FS.readFile(path + step + '/package.json')
-    const pkg = JSON.parse(buffer.toString()) as { version: string }
+    const pkg = JSON.parse(buffer.toString())
 
-    return pkg.version
+    return pkg
   } catch (error) {
-    return await getCurrentPkgVersion(path, step + '/..')
+    return await getCurrentPkgConfig(path, step + '/..')
   }
 }

@@ -1,3 +1,3 @@
-import { Terminal } from '../core/Terminal'
+import { Terminal } from '..'
 
-Terminal.getCurrentPkgVersion().then(console.log)
+Terminal.getCurrentPkgConfig().then(pkg => console.log(pkg.version))
