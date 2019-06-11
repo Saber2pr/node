@@ -7,7 +7,7 @@
 import { ServerResponse } from 'http'
 import { Headers } from './header'
 
-export class HttpException extends Error {
+export class Exception extends Error {
   constructor(public message: string, public code: number) {
     super(message)
   }
@@ -17,7 +17,7 @@ export class HttpException extends Error {
     headers?: Headers
   ) {
     return new Promise(resolve => {
-      const err: HttpException = HttpException
+      const err: Exception = HttpException
       response.writeHead(err.code, <any>headers)
       response.end(err.message, resolve)
     })

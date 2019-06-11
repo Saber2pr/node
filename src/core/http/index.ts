@@ -1,5 +1,5 @@
 export * from './cookie'
 export * from './header'
-export * from './httpException'
+export * from './exception'
 export * from './query'
 export * from './request'
