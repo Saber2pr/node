@@ -4,7 +4,7 @@
  * @Last Modified by: saber2pr
  * @Last Modified time: 2019-05-27 20:45:44
  */
-import { FS } from '../File'
+import * as FS from '../file'
 import { Package } from '../package'
 
 let CALLSTACKLEN = 0
