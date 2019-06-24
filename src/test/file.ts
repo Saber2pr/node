@@ -1,4 +1,4 @@
-import { FS } from '../core/File'
+import { FS } from '..'
 
 async function test() {
   // const files = await FS.search(process.cwd() + '/src', 'file', 2)
