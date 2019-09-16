@@ -13,7 +13,7 @@ export const clean = (path: string) =>
     .then(s =>
       s
         .split(/\n|\r\n/)
-        .filter(l => l.length)
+        .filter(l => l.trim().length)
         .join("\n")
     )
     .then(str => writeFile(path, str))
