@@ -10,4 +10,10 @@ import { REG } from "../reg"
 export const clean = (path: string) =>
   readFile(path)
     .then(b => b.toString().replace(REG.Comment, ""))
+    .then(s =>
+      s
+        .split(/\n|\r\n/)
+        .filter(l => l.length)
+        .join("\n")
+    )
     .then(str => writeFile(path, str))
