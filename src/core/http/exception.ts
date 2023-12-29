@@ -19,7 +19,7 @@ export class Exception extends Error {
     return new Promise(resolve => {
       const err: Exception = HttpException
       response.writeHead(err.code, <any>headers)
-      response.end(err.message, resolve)
+      response.end(err.message, () => resolve(null))
     })
   }
 }
