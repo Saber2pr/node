@@ -19,7 +19,8 @@
   "scripts": {
     "start": "tsc --watch",
     "test": "node ./lib/test/test.js",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "typescript": "^3.2.1"
