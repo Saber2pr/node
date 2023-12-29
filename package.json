@@ -18,7 +18,8 @@
   "main": "./lib/index.js",
   "scripts": {
     "start": "tsc --watch",
-    "test": "node ./lib/test/test.js"
+    "test": "node ./lib/test/test.js",
+    "build": "tsc"
   },
   "devDependencies": {
     "typescript": "^3.2.1"
