@@ -1,10 +1,5 @@
-import * as fs from "./file"
-import * as http from "./http"
+export * as FS from "./file"
+export * as Http from "./http"
 export * from "./package"
-import * as terminal from "./terminal"
-import * as utils from "./utils"
-
-export const FS = fs
-export const Http = http
-export const Terminal = terminal
-export const Utils = utils
+export * as Terminal from "./terminal"
+export * as Utils from "./utils"
